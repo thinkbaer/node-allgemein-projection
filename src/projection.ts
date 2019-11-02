@@ -140,37 +140,3 @@ function resolve($def: any, input: any, output?: any, k?: string | number) {
 
 }
 
-//
-// function sub($def: any, input: any, output: any, k: string | number) {
-//   if (_.isString($def)) {
-//     // direct key access
-//     let lookup = $def.match(/^\$(.+)/);
-//     if (lookup) {
-//       // get path to object
-//       lookup = <any>lookup[1];
-//       const values = _.get(input, lookup);
-//       _.set(output, k, values);
-//     } else {
-//       _.set(output, k, $def);
-//     }
-//   } else if (_.isNumber($def) && ($def === 1 || $def === 0)) {
-//     if ($def === 1) {
-//       _.set(output, k, _.get(input, k));
-//     } else {
-//       _.unset(output, k);
-//     }
-//   } else if (_.isArray($def)) {
-//     const arr: any[] = [];
-//     _.set(output, k, arr);
-//     for (let i = 0; i < $def.length; i++) {
-//       sub($def[i], input, arr, i);
-//     }
-//   } else if (_.isPlainObject($def)) {
-//     _.set(output, k, {});
-//     // project($def, input, output[k], def);
-//   } else {
-//     _.set(output, k, $def);
-//   }
-//
-// }
-//
