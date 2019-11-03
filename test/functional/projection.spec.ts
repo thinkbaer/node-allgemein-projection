@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {suite, test} from 'mocha-typescript';
-import {projection} from '../../src/projection';
+import {projection} from '../../src';
 
 
 const testString = 'Das ist ein hallo von Welt programm.';
@@ -77,6 +77,63 @@ class ProjectionSpec {
     const projected = projection(def, input);
     expect(projected).to.be.deep.eq({myVar: {content: 'data'}});
   }
+
+
+  @test.skip
+  async 'array value include'() {
+    const def = {entryValues: '$someGiven.entry'};
+    const input = {
+      someGiven: [
+        {entry: 'one'},
+        {entry: 'two'}
+      ]
+    };
+    const projected = projection(def, input);
+    expect(projected).to.be.deep.eq({});
+  }
+
+  @test.skip
+  async 'array value iteration'() {
+    const def = {
+      entry: {
+        $map: {
+          input: '$someGiven',
+          as: 'item',
+          in: {value: '$$item'}
+        }
+      }
+    };
+    const input = {
+      someGiven: [
+        {entry: 'one'},
+        {entry: 'two'}
+      ]
+    };
+    const projected = projection(def, input);
+    expect(projected).to.be.deep.eq({});
+  }
+
+  @test.skip
+  async 'conditional fields'() {
+  }
+
+  @test.skip
+  async 'command: first'() {
+  }
+
+  @test.skip
+  async 'command: last'() {
+  }
+
+  @test.skip
+  async 'command: parseInt'() {
+  }
+
+
+  @test.skip
+  async 'command: parseFloat'() {
+  }
+
 
   @test
   async 'command: substr'() {
